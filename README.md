@@ -6,7 +6,7 @@ Enterprise environments often involve domain-specific terminology and complex re
 SupplyBench consists of two primary components:
 
 * Knowledge graph: A structured representation of the semiconductor industry supply networks, including information about enterprises and their supply relations.
-* Query corpus: A collection of question/query pairs focused on enterprises and supply relations.
+* Query corpus: A collection of question/query pairs about enterprises and supply relations.
 
 Although SupplyBench focuses on the semiconductor industry, we expect that the benchmark's insights also apply to broader enterprise settings.
 
