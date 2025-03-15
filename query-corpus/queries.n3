@@ -45,18 +45,25 @@ rdf:value
 ?x tbox:siteType we:Q298 .
 } .
 
+[] rdfs:label "Chip fabs"@en ;
+dc:subject "one triple pattern" ;
+rdf:value
+{
+?x tbox:siteType we:Q297 .
+} .
+
 [] rdfs:label "Types of companies"@en ;
 dc:subject "one triple pattern" ;
 rdf:value
 {
-?x rdf:type tbox:OrganizationClass .
+?x rdf:type tbox:OrganizationType .
 } .
 
 [] rdfs:label "Types of sites"@en ;
 dc:subject "one triple pattern" ;
 rdf:value
 {
-?x rdf:type tbox:SiteClass .
+?x rdf:type tbox:SiteType .
 } .
 
 [] rdfs:label "Companies offering design services"@en ;
@@ -148,14 +155,6 @@ rdf:value
 {
 ?x tbox:observedEnterprise <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/company/weQ22.ttl#this> .
 ?x tbox:netProfit _:y .
-} .
-
-[] rdfs:label "Assembly/test sites of companies"@en ;
-dc:subject "two triple patterns" ;
-rdf:value
-{
-_:y org:hasSite ?x .
-?x tbox:siteType we:Q298 .
 } .
 
 [] rdfs:label "Assembly/test sites of Intel"@en ;
@@ -413,17 +412,6 @@ rdf:value
 _:y geonames:parentFeature__plus <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/region/wdQ2090.ttl#this> .
 } .
 
-[] rdfs:label "Bavarian organisations"@en ;
-dc:subject "three triple patterns" ;
-dc:subject "geo" ;
-rdfs:comment "the number of geonames:parentFeature hops from the various sites to Bavaria is not fixed" ;
-rdf:value
-{
- ?x a org:Organization .
- ?x org:hasRegisteredSite _:y .
- _:y geonames:parentFeature__plus <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/region/wdQ980.ttl#this> .
-} .
-
 [] rdfs:label "Country where TSMC has its headquarter"@en ;
 dc:subject "three triple patterns" ;
 dc:subject "geo" ;
@@ -556,17 +544,6 @@ _:c esn:supplier _:y .
 ?x tbox:size we:Q1047 .
 } .
 
-[] rdfs:label "Large equipment suppliers of TSMC"@en ;
-dc:subject "four triple patterns" ;
-dc:subject "supply" ;
-rdf:value
-{
-_:c esn:customer <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/company/weQ20.ttl#this> . 
-_:c esn:supplier ?x .
-?x tbox:organizationType we:Q1023 .
-?x tbox:size we:Q1048 .
-} .
-
 [] rdfs:label "Employee count of companies with assembly/test sites"@en ;
 dc:subject "four triple patterns" ;
 dc:subject "keyfigure" ;
@@ -578,13 +555,13 @@ _:z tbox:siteType we:Q298 .
 ?x tbox:employees _:a .
 } .
 
-[] rdfs:label "Net profit of companies with assembly/test sites"@en ;
+[] rdfs:label "Net profit of companies with chip fabs"@en ;
 dc:subject "four triple patterns" ;
 dc:subject "keyfigure" ;
 rdf:value
 {
 _:y org:hasSite _:z .
-_:z tbox:siteType we:Q298 .
+_:z tbox:siteType we:Q297 .
 ?x tbox:observedEnterprise _:y .
 ?x tbox:netProfit _:a .
 } .
@@ -687,198 +664,4 @@ rdf:value
 ?x tbox:accountingYear 2021 .
 ?x tbox:currency "United States dollar"@en . 
 ?x tbox:operatingIncome _:a .
-} .
-
-
-###########################################################################
-# five triple patterns
-###########################################################################
-
-
-[] rdfs:label "Suppliers of Pat Gelsinger's company"@en ;
-dc:subject "five triple patterns" ;
-dc:subject "member" ;
-dc:subject "supply" ;
-rdf:value
-{
-_:y org:organization _:z .
-_:y org:role tbox:CEO .
-_:y org:member <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/person/wdQ7143480.ttl#this> .
-_:c esn:customer _:z . 
-_:c esn:supplier ?x .
-} .
-
-[] rdfs:label "Medium size suppliers of large fabless companies"@en ;
-dc:subject "five triple patterns" ;
-dc:subject "supply" ;
-rdf:value
-{
-_:y tbox:organizationType we:Q1023 .
-_:y tbox:size we:Q1048 .
-_:c esn:customer _:y . 
-_:c esn:supplier ?x .
-?x tbox:size we:Q1047 .
-} .
-
-[] rdfs:label "Medium size customers of large equipment companies"@en ;
-dc:subject "five triple patterns" ;
-dc:subject "supply" ;
-rdf:value
-{
-_:y tbox:organizationType we:Q286 .
-_:y tbox:size we:Q1048 .
-_:c esn:customer ?x . 
-_:c esn:supplier _:y .
-?x tbox:size we:Q1047 .
-} .
-
-[] rdfs:label "CEOs of suppliers of Intel"@en ;
-dc:subject "five triple patterns" ;
-dc:subject "member" ;
-dc:subject "supply" ;
-rdf:value
-{
-_:c esn:customer <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/company/weQ22.ttl#this> . 
-_:c esn:supplier _:z .
-_:y org:organization _:z .
-_:y org:role tbox:CEO .
-_:y org:member ?x .
-} .
-
-[] rdfs:label "CEOs of customers of Intel"@en ;
-dc:subject "five triple patterns" ;
-dc:subject "member" ;
-dc:subject "supply" ;
-rdf:value
-{
-_:c esn:customer _:z . 
-_:c esn:supplier <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/company/weQ22.ttl#this> .
-_:y org:organization _:z .
-_:y org:role tbox:CEO .
-_:y org:member ?x .
-} .
-
-[] rdfs:label "Employee count of IDMs with sites in Nuremberg"@en ;
-dc:subject "five triple patterns" ;
-dc:subject "keyfigure" ;
-dc:subject "geo" ;
-rdfs:comment "the number of geonames:parentFeature hops from the various sites to Taiwan is not fixed" ;
-rdf:value
-{
-_:z tbox:organizationType we:Q285 .
-?x tbox:observedEnterprise _:z .
-?x tbox:employees _:a .
-_:z org:hasSite _:y .
-_:y geonames:parentFeature__plus <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/region/wdQ2090.ttl#this> .
-} .
-
-[] rdfs:label "CEOs of very large IDMs"@en ;
-dc:subject "five triple patterns" ;
-dc:subject "member" ;
-rdf:value
-{
-_:z tbox:organizationType we:Q285 .
-_:z tbox:size we:Q1049 .
-_:y org:organization _:z .
-_:y org:role tbox:CEO .
-_:y org:member ?x .
-} .
-
-[] rdfs:label "CEOs of very large companies offering foundry services"@en ;
-dc:subject "five triple patterns" ;
-dc:subject "member" ;
-rdf:value
-{
-_:z tbox:providesService we:Q291 .
-_:z tbox:size we:Q1049 .
-_:y org:organization _:z .
-_:y org:role tbox:CEO .
-_:y org:member ?x .
-} .
-
-[] rdfs:label "Employee count of companies with assembly/test sites in Bangkok"@en ;
-dc:subject "five triple patterns" ;
-dc:subject "keyfigure" ;
-dc:subject "geo" ;
-rdfs:comment "the number of geonames:parentFeature hops from the various sites to Taiwan is not fixed" ;
-rdf:value
-{
-?x tbox:observedEnterprise _:y .
-?x tbox:employees _:a .
-_:y org:hasSite _:z .
-_:z tbox:siteType we:Q298 .
-_:z geonames:parentFeature__plus <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/region/wdQ19316.ttl#this> .
-} .
-
-[] rdfs:label "Net profit of large companies with assembly/test sites"@en ;
-dc:subject "five triple patterns" ;
-dc:subject "keyfigure" ;
-rdf:value
-{
-?x tbox:observedEnterprise _:y .
-?x tbox:netProfit _:a .
-_:y tbox:size we:Q1048 .
-_:y org:hasSite _:z .
-_:z tbox:siteType we:Q298 .
-} .
-
-
-###########################################################################
-# six triple patterns
-###########################################################################
-
-
-[] rdfs:label "Capex of companies offering foundry services and IDMs as customers"@en ;
-dc:subject "five triple patterns" ;
-dc:subject "keyfigure" ;
-dc:subject "supply" ;
-rdf:value
-{
-_:y tbox:providesService we:Q291 .
-?x tbox:observedEnterprise _:y .
-?x tbox:capex _:a .
-_:c esn:customer _:z . 
-_:c esn:supplier _:y .
-_:z tbox:organizationType we:Q285 .
-} .
-
-[] rdfs:label "CEOs of large fabless suppliers of TSMC"@en ;
-dc:subject "six triple patterns" ;
-dc:subject "member" ;
-dc:subject "supply" ;
-rdf:value
-{
-_:c esn:customer <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/company/weQ20.ttl#this> . 
-_:c esn:supplier _:z .
-_:z tbox:organizationType we:Q286 .
-_:z tbox:size we:Q1048 .
-_:y org:organization _:z .
-_:y org:role tbox:CEO .
-_:y org:member ?x .
-} .
-
-[] rdfs:label "CEOs of very large IDMs offering foundry services"@en ;
-dc:subject "six triple patterns" ;
-dc:subject "member" ;
-rdf:value
-{
-_:z tbox:organizationType we:Q285 .
-_:z tbox:providesService we:Q291 .
-_:z tbox:size we:Q1049 .
-_:y org:organization _:z .
-_:y org:role tbox:CEO .
-_:y org:member ?x .
-} .
-
-[] rdfs:label "Type of companies with CEO publications in 2005"@en ;
-dc:subject "six triple patterns" ;
-dc:subject "member" ;
-rdf:value
-{
-_:b tbox:organizationType ?x .
-_:y org:organization _:b .
-_:y org:role tbox:CEO .
-_:y org:member _:z .
-_:z dblp:authorOf _:a  .
-_:a dblp:yearOfPublication "2005"^^xsd:gYear .
 } .

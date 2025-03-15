@@ -40,16 +40,16 @@ org:Membership a rdfs:Class ;
 org:Role a rdfs:Class ;
     rdfs:label "Role"@en .
 
-:OrganizationClass a rdfs:Class ;
-    rdfs:label "Organization class"@en ;
+:OrganizationType a rdfs:Class ;
+    rdfs:label "Organization type"@en ;
     rdfs:subClassOf skos:Concept .
 
 org:Site a rdfs:Class ;
     rdfs:label "Site"@en ;
     rdfs:subClassOf geonames:Feature .
 
-:SiteClass a rdfs:Class ;
-    rdfs:label "Site class"@en ;
+:SiteType a rdfs:Class ;
+    rdfs:label "Site type"@en ;
     rdfs:subClassOf skos:Concept .
 
 we:Q293 a rdfs:Class ;
@@ -75,7 +75,7 @@ wgs:SpatialThing a rdfs:Class ;
 
 geonames:Feature a rdfs:Class ;
     rdfs:label "Feature"@en ;
-    rdfs:comment "A geographical feature"@en ;
+    rdfs:comment "A geographical feature."@en ;
     rdfs:subClassOf wgs:SpatialThing .
 
 geonames:Class rdf:type rdfs:Class ;
@@ -132,12 +132,12 @@ time:Instant a rdfs:Class ;
 :organizationType a owl:ObjectProperty ;
     rdfs:label "organization type"@en ;
     rdfs:domain org:Organization ;
-    rdfs:range :OrganizationClass .
+    rdfs:range :OrganizationType .
 
 :siteType a owl:ObjectProperty ;
     rdfs:label "site type"@en ;
     rdfs:domain org:Site ;
-    rdfs:range :SiteClass .
+    rdfs:range :SiteType .
 
 esn:supplier a owl:ObjectProperty ;
     rdfs:label "supplier"@en ;
@@ -161,32 +161,6 @@ org:hasRegisteredSite a owl:ObjectProperty ;
     rdfs:domain org:Organization ;
     rdfs:range org:Site .
 
-:ceoOf a owl:ObjectProperty ;
-    rdfs:label "ceo of"@en ;
-    owl:inverseOf :hasCeo ;
-    rdfs:domain foaf:Person ;
-    rdfs:range org:Organization ;
-    rdfs:subPropertyOf org:memberOf .
-
-org:memberOf a owl:ObjectProperty ;
-    rdfs:label "member of"@en ;
-    owl:inverseOf org:hasMember ;
-    rdfs:domain foaf:Agent ;
-    rdfs:range org:Organization .
-
-:hasCeo a owl:ObjectProperty ;
-    rdfs:label "has ceo"@en ;
-    owl:inverseOf :ceoOf ;
-    rdfs:domain org:Organization ;
-    rdfs:range foaf:Person ;
-    rdfs:subPropertyOf org:hasMember .
-
-org:hasMember a owl:ObjectProperty ;
-    rdfs:label "has member"@en ;
-    owl:inverseOf org:memberOf ;
-    rdfs:domain org:Organization ;
-    rdfs:range foaf:Agent .
-
 org:organization a owl:ObjectProperty ;
     rdfs:label "organization"@en ;
     rdfs:domain org:Membership ;
@@ -202,12 +176,6 @@ org:member a owl:ObjectProperty ;
     owl:inverseOf org:hasMembership ;
     rdfs:domain org:Membership ;
     rdfs:range foaf:Agent .
-
-org:hasMembership a owl:ObjectProperty ;
-    rdfs:label "has membership"@en ;
-    owl:inverseOf org:member ;
-    rdfs:domain foaf:Agent ;
-    rdfs:range org:Membership .
 
 org:memberDuring a owl:DatatypeProperty ;
     rdfs:label "member during"@en ;
@@ -234,12 +202,6 @@ foaf:homepage a owl:ObjectProperty ;
     rdfs:domain qb:Observation ;
     rdfs:range org:Organization .
 
-:enterpriseObservation a owl:ObjectProperty ;
-    rdfs:label "observed enterprise"@en ;
-    rdfs:domain org:Organization ;
-    rdfs:range qb:Observation ;
-    owl:inverseOf :observedEnterprise .
-
 dblp:authorOf a owl:ObjectProperty ;
     rdfs:label "author of"@en ;
     rdfs:domain dblp:Creator ;
@@ -250,12 +212,6 @@ geonames:parentFeature a owl:ObjectProperty , owl:TransitiveProperty ;
     rdfs:comment "A feature parent of the current one, in either administrative or physical subdivision."@en ; 
     rdfs:domain geonames:Feature ;
     rdfs:range geonames:Feature .
-
-geonames:parentCountry a owl:ObjectProperty ;
-    rdfs:label "parent country"@en ;
-    rdfs:domain geonames:Feature ;
-    rdfs:range geonames:Feature ;
-    rdfs:subPropertyOf geonames:parentFeature .
 
 geonames:featureCode rdf:type owl:ObjectProperty ;
     rdfs:label "feature code"@en ;
@@ -345,31 +301,31 @@ time:inXSDDateTime a owl:DatatypeProperty ;
 
 ### individuals
 
-we:Q285 a :OrganizationClass ;
+we:Q285 a :OrganizationType ;
     rdfs:label "Integrated Device Manufacturer"@en .
 
-we:Q286 a :OrganizationClass ;
+we:Q286 a :OrganizationType ;
     rdfs:label "Fabless"@en .
 
-we:Q287 a :OrganizationClass ;
+we:Q287 a :OrganizationType ;
     rdfs:label "Foundry"@en .
 
-we:Q879 a :OrganizationClass ;
+we:Q879 a :OrganizationType ;
     rdfs:label "Outsourced semiconductor assembly and test"@en .
 
-we:Q1023 a :OrganizationClass ;
+we:Q1023 a :OrganizationType ;
     rdfs:label "Equipment manufacturer"@en .
 
-we:Q1060 a :OrganizationClass ;
+we:Q1060 a :OrganizationType ;
     rdfs:label "Materials producer"@en .
 
-we:Q297 a :SiteClass ;
+we:Q297 a :SiteType ;
     rdfs:label "Chip fab"@en .
 
-we:Q298 a :SiteClass ;
+we:Q298 a :SiteType ;
     rdfs:label "Assembly/Test facility"@en .
 
-we:Q1180 a :SiteClass ;
+we:Q1180 a :SiteType ;
     rdfs:label "Material fab"@en .
 
 we:Q288 a we:Q293 ;
@@ -404,13 +360,13 @@ we:Q1049 a we:Q1045 ;
     org:roleProperty :ceoOf .
 
 geonames:A a geonames:Class ;
-    rdfs:comment "country, state, region ..."@en .
+    rdfs:label "country, state, region ..."@en .
 
 geonames:P a geonames:Class ;
-    rdfs:comment "city, village,..."@en .
+    rdfs:label "city, village,..."@en .
 
 geonames:S a geonames:Class ;
-    rdfs:comment "spot, building, farm, ..."@en .
+    rdfs:label "spot, building, farm, ..."@en .
 
 geonames:A.PCLI a geonames:Code ;
     rdfs:label "independent political entity"@en ;
