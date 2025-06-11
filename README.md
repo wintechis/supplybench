@@ -1,6 +1,6 @@
 # SupplyBench
 
-SupplyBench is a specialised benchmark designed to evaluate question answering systems operating in enterprise settings, particularly within the semiconductor industry.
+SupplyBench is a specialised benchmark designed to evaluate question answering systems operating in enterprise settings.
 Enterprise environments often involve domain-specific terminology and complex relationships that general-purpose question answering systems may struggle to handle effectively.
 
 SupplyBench consists of two primary components:
