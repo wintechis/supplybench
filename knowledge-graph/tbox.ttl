@@ -356,8 +356,7 @@ we:Q1049 a we:Q1045 ;
     rdfs:label "Very large"@en .
 
 :CEO a org:Role ;
-    rdfs:label "CEO"@en ;
-    org:roleProperty :ceoOf .
+    rdfs:label "CEO"@en .
 
 geonames:A a geonames:Class ;
     rdfs:label "country, state, region ..."@en .
