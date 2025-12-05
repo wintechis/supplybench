@@ -1,0 +1,395 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix geonames: <http://www.geonames.org/ontology#> .
+@prefix wgs: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix dblp: <https://dblp.org/rdf/schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix qb: <http://purl.org/linked-data/cube#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix dbo: <https://dbpedia.org/ontology/> .
+@prefix we: <https://welektronik.iis.fraunhofer.de/entity/> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix sn: <https://purl.org/supply-network/onto#> .
+@prefix sb: <https://purl.org/supplybench#> .
+
+### ontology
+
+sb: a owl:Ontology ;
+    rdfs:label "SupplyBench Ontology"@en ;
+    dct:title "SupplyBench Ontology"@en ;
+    owl:versionInfo "0.3.0" ;
+    owl:versionIRI <https://purl.org/supplybench/v0.3> ;
+    dct:created "2025-12-03"^^xsd:date ;
+    dct:creator <https://danielhenselmann.solidcommunity.net/profile/card#me> ;
+    dct:license <https://creativecommons.org/licenses/by/4.0/> ;
+    vann:preferredNamespaceUri <https://purl.org/supplybench#> ;
+    vann:preferredNamespacePrefix "sb" ;
+    rdfs:isDefinedBy sb: .
+
+<https://danielhenselmann.solidcommunity.net/profile/card#me> foaf:name "Daniel Henselmann" .
+
+### classes
+
+owl:Thing a rdfs:Class ;
+    rdfs:label "Thing"@en .
+
+sb:Enterprise a rdfs:Class ;
+    rdfs:label "Enterprise"@en ;
+    rdfs:subClassOf org:Organization .
+
+sn:SupplyFlow a rdfs:Class ;
+    rdfs:label "Supply Flow"@en ;
+    rdfs:comment "A qualified directed supply relation between two entities."@en .
+
+org:Organization a rdfs:Class ;
+    rdfs:label "Organization"@en ;
+    rdfs:subClassOf owl:Thing .
+
+org:Membership a rdfs:Class ;
+    rdfs:label "Membership"@en .
+
+org:Role a rdfs:Class ;
+    rdfs:label "Role"@en .
+
+sb:OrganizationType a rdfs:Class ;
+    rdfs:label "Organization type"@en ;
+    rdfs:subClassOf skos:Concept .
+
+org:Site a rdfs:Class ;
+    rdfs:label "Site"@en ;
+    rdfs:subClassOf geonames:Feature .
+
+sb:SiteType a rdfs:Class ;
+    rdfs:label "Site type"@en ;
+    rdfs:subClassOf skos:Concept .
+
+we:Q293 a rdfs:Class ;
+    rdfs:label "Service"@en ;
+    rdfs:subClassOf skos:Concept .
+
+we:Q1045 a rdfs:Class ;
+    rdfs:label "Enterprise size"@en ;
+    rdfs:subClassOf skos:Concept .
+
+foaf:Agent a rdfs:Class ;
+    rdfs:label "Agent"@en .
+
+foaf:Person a rdfs:Class ;
+    rdfs:label "Person"@en ;
+    rdfs:subClassOf foaf:Agent .
+
+foaf:Document a rdfs:Class ;
+    rdfs:label "Document"@en .
+
+wgs:SpatialThing a rdfs:Class ;
+    rdfs:label "Spatial thing"@en .
+
+geonames:Feature a rdfs:Class ;
+    rdfs:label "Feature"@en ;
+    rdfs:comment "A geographical feature."@en ;
+    rdfs:subClassOf wgs:SpatialThing .
+
+geonames:Class rdf:type rdfs:Class ;
+    rdfs:label "Class"@en ;
+    rdfs:comment "A class of features."@en ;
+    rdfs:subClassOf skos:ConceptScheme .
+
+geonames:Code rdf:type rdfs:Class ;
+    rdfs:label "Code"@en ;
+    rdfs:comment "A feature code."@en ;
+    rdfs:subClassOf skos:Concept .
+
+qb:Observation a rdfs:Class ;
+    rdfs:label "Observation"@en ;
+    rdfs:comment "An n-ary relation between an organization, an accounting year, a value for a certain key figure, and the value's unit/currency."@en .
+
+qb:DimensionProperty a rdfs:Class ;
+    rdfs:label "Dimension property"@en ;
+    rdfs:subClassOf rdf:Property .
+
+qb:AttributeProperty a rdfs:Class ;
+    rdfs:label "Attribute property"@en ;
+    rdfs:subClassOf rdf:Property .
+
+qb:MeasureProperty a rdfs:Class ;
+    rdfs:label "Measure property"@en ;
+    rdfs:subClassOf rdf:Property .
+
+dblp:Creator a rdfs:Class ;
+    rdfs:label "Publication"@en ;
+    rdfs:subClassOf foaf:Person .
+
+dblp:Publication a rdfs:Class ;
+    rdfs:label "Publication"@en .
+
+time:Interval a rdfs:Class ;
+    rdfs:label "Interval"@en .
+
+time:Instant a rdfs:Class ;
+    rdfs:label "Instant"@en .
+
+
+### object properties
+
+sb:providesService a owl:ObjectProperty , rdf:Property ;
+    rdfs:label "provides service"@en ;
+    rdfs:domain org:Organization ;
+    rdfs:range we:Q293 .
+
+sb:size a owl:ObjectProperty , rdf:Property ;
+    rdfs:label "size"@en ;
+    rdfs:domain org:Organization ;
+    rdfs:range we:Q1045 .
+
+sb:organizationType a owl:ObjectProperty , rdf:Property ;
+    rdfs:label "organization type"@en ;
+    rdfs:domain org:Organization ;
+    rdfs:range sb:OrganizationType .
+
+sb:siteType a owl:ObjectProperty , rdf:Property ;
+    rdfs:label "site type"@en ;
+    rdfs:domain org:Site ;
+    rdfs:range sb:SiteType .
+
+sb:supplier a owl:ObjectProperty , rdf:Property ;
+    rdfs:label "supplier"@en ;
+    rdfs:comment "Links the supplying enterprise in a supply flow between two enterprises."@en ;
+    rdfs:domain sn:SupplyFlow ;
+    rdfs:range sb:Enterprise .
+
+sb:customer a owl:ObjectProperty , rdf:Property ;
+    rdfs:label "customer"@en ;
+    rdfs:comment "Links the customer enterprise in a supply flow between two enterprises."@en ;
+    rdfs:domain sn:SupplyFlow ;
+    rdfs:range sb:Enterprise .
+
+org:hasSite a owl:ObjectProperty , rdf:Property ;
+    rdfs:label "has site"@en ;
+    rdfs:domain org:Organization ;
+    rdfs:range org:Site .
+
+org:hasRegisteredSite a owl:ObjectProperty , rdf:Property ;
+    rdfs:label "has registered site"@en ;
+    rdfs:domain org:Organization ;
+    rdfs:range org:Site .
+
+org:organization a owl:ObjectProperty , rdf:Property ;
+    rdfs:label "organization"@en ;
+    rdfs:domain org:Membership ;
+    rdfs:range org:Organization .
+
+org:role a owl:ObjectProperty , rdf:Property ;
+    rdfs:label "role"@en ;
+    rdfs:domain org:Membership ;
+    rdfs:range org:Role .
+
+org:member a owl:ObjectProperty , rdf:Property ;
+    rdfs:label "member"@en ;
+    owl:inverseOf org:hasMembership ;
+    rdfs:domain org:Membership ;
+    rdfs:range foaf:Agent .
+
+org:memberDuring a owl:DatatypeProperty , rdf:Property ;
+    rdfs:label "member during"@en ;
+    rdfs:domain org:Membership ;
+    rdfs:range time:Interval .
+
+time:hasBeginning a owl:DatatypeProperty , rdf:Property ;
+    rdfs:label "has beginning"@en ;
+    rdfs:domain time:Interval ;
+    rdfs:range time:Instant .
+
+time:hasEnd a owl:DatatypeProperty , rdf:Property ;
+    rdfs:label "has end"@en ;
+    rdfs:domain time:Interval ;
+    rdfs:range time:Instant .
+
+foaf:homepage a owl:ObjectProperty , rdf:Property ;
+    rdfs:label "homepage"@en ;
+    rdfs:domain owl:Thing ;
+    rdfs:range foaf:Document .
+
+sb:observedEnterprise a owl:ObjectProperty , rdf:Property , qb:DimensionProperty ;
+    rdfs:label "observed enterprise"@en ;
+    rdfs:domain qb:Observation ;
+    rdfs:range org:Organization .
+
+dblp:authorOf a owl:ObjectProperty , rdf:Property ;
+    rdfs:label "author of"@en ;
+    rdfs:domain dblp:Creator ;
+    rdfs:range dblp:Publication .
+
+geonames:parentFeature a owl:ObjectProperty , rdf:Property , owl:TransitiveProperty ;
+    rdfs:label "parent feature"@en ;
+    rdfs:comment "A feature parent of the current one, in either administrative or physical subdivision."@en ; 
+    rdfs:domain geonames:Feature ;
+    rdfs:range geonames:Feature .
+
+geonames:parentCountry a owl:ObjectProperty , rdf:Property ;
+    rdfs:label "parent country"@en ;
+    rdfs:domain geonames:Feature ;
+    rdfs:range geonames:Feature ;
+    rdfs:subPropertyOf geonames:parentFeature .
+
+geonames:featureCode rdf:type owl:ObjectProperty , rdf:Property ;
+    rdfs:label "feature code"@en ;
+    rdfs:comment "Type of the feature, as defined in geonames taxonomy."@en ;
+    rdfs:domain geonames:Feature ;
+    rdfs:range geonames:Code .
+
+geonames:featureClass rdf:type owl:ObjectProperty , rdf:Property ;
+    rdfs:label "feature class"@en ;
+    rdfs:comment "The main category of the feature, as defined in geonames taxonomy."@en ;
+    rdfs:domain geonames:Feature ;
+    rdfs:range geonames:Class .
+
+
+### datatype properties
+
+wgs:lat a owl:DatatypeProperty , rdf:Property ;
+    rdfs:label "latitude"@en ;
+    rdfs:domain wgs:SpatialThing ;
+    rdfs:range xsd:decimal .
+
+wgs:long a owl:DatatypeProperty , rdf:Property ;
+    rdfs:label "longitude"@en ;
+    rdfs:domain wgs:SpatialThing ;
+    rdfs:range xsd:decimal .
+
+sb:currency a owl:DatatypeProperty , rdf:Property , qb:AttributeProperty ;
+    rdfs:label "currency"@en ;
+    rdfs:domain qb:Observation ;
+    rdfs:range rdf:langString .
+
+sb:accountingYear a owl:DatatypeProperty , rdf:Property , qb:DimensionProperty ;
+    rdfs:label "accounting year"@en ;
+    rdfs:domain qb:Observation ;
+    rdfs:range xsd:integer .
+
+sb:totalAssets a owl:DatatypeProperty , rdf:Property , qb:MeasureProperty ;
+    rdfs:label "total assets"@en ;
+    rdfs:domain qb:Observation ;
+    rdfs:range xsd:decimal .
+
+sb:totalEquity a owl:DatatypeProperty , rdf:Property , qb:MeasureProperty ;
+    rdfs:label "total equity"@en ;
+    rdfs:domain qb:Observation ;
+    rdfs:range xsd:decimal.
+
+sb:totalRevenue a owl:DatatypeProperty , rdf:Property , qb:MeasureProperty ;
+    rdfs:label "total revenue"@en ;
+    rdfs:domain qb:Observation ;
+    rdfs:range xsd:decimal .
+
+sb:operatingIncome a owl:DatatypeProperty , rdf:Property , qb:MeasureProperty ;
+    rdfs:label "operating income"@en ;
+    rdfs:domain qb:Observation ;
+    rdfs:range xsd:decimal .
+
+sb:netProfit a owl:DatatypeProperty , rdf:Property , qb:MeasureProperty ;
+    rdfs:label "net profit"@en ;
+    rdfs:domain qb:Observation ;
+    rdfs:range xsd:decimal .
+
+sb:capex a owl:DatatypeProperty , rdf:Property , qb:MeasureProperty ;
+    rdfs:label "capex"@en ;
+    rdfs:domain qb:Observation ;
+    rdfs:range xsd:decimal .
+
+sb:employees a owl:DatatypeProperty , rdf:Property , qb:MeasureProperty ;
+    rdfs:label "employees"@en ;
+    rdfs:domain qb:Observation ;
+    rdfs:range xsd:decimal .
+
+dblp:yearOfPublication a owl:DatatypeProperty , rdf:Property ;
+    rdfs:label "year of publication"@en ;
+    rdfs:domain dblp:Publication ;
+    rdfs:range xsd:gYear .
+
+dblp:title a owl:DatatypeProperty , rdf:Property ;
+    rdfs:label "title"@en ;
+    rdfs:domain dblp:Publication ;
+    rdfs:range xsd:string .
+
+time:inXSDDateTime a owl:DatatypeProperty , rdf:Property ;
+    rdfs:label "in xsd date time"@en ;
+    rdfs:domain time:Instant ;
+    rdfs:range xsd:dateTime .
+
+
+### individuals
+
+we:Q285 a sb:OrganizationType ;
+    rdfs:label "Integrated Device Manufacturer"@en .
+
+we:Q286 a sb:OrganizationType ;
+    rdfs:label "Fabless"@en .
+
+we:Q287 a sb:OrganizationType ;
+    rdfs:label "Foundry"@en .
+
+we:Q879 a sb:OrganizationType ;
+    rdfs:label "Outsourced semiconductor assembly and test"@en .
+
+we:Q1023 a sb:OrganizationType ;
+    rdfs:label "Equipment manufacturer"@en .
+
+we:Q1060 a sb:OrganizationType ;
+    rdfs:label "Materials producer"@en .
+
+we:Q297 a sb:SiteType ;
+    rdfs:label "Chip fab"@en .
+
+we:Q298 a sb:SiteType ;
+    rdfs:label "Assembly/Test facility"@en .
+
+we:Q1180 a sb:SiteType ;
+    rdfs:label "Material fab"@en .
+
+we:Q288 a we:Q293 ;
+    rdfs:label "Design"@en .
+
+we:Q292 a we:Q293 ;
+    rdfs:label "IP-Core"@en .
+
+we:Q291 a we:Q293 ;
+    rdfs:label "Foundry Service"@en .
+
+we:Q290 a we:Q293 ;
+    rdfs:label "Packaging"@en .
+
+we:Q289 a we:Q293 ;
+    rdfs:label "Testing"@en .
+
+we:Q1046 a we:Q1045 ;
+    rdfs:label "Small"@en .
+
+we:Q1047 a we:Q1045 ;
+    rdfs:label "Medium"@en .
+
+we:Q1048 a we:Q1045 ;
+    rdfs:label "Large"@en .
+
+we:Q1049 a we:Q1045 ;
+    rdfs:label "Very large"@en .
+
+sb:CEO a org:Role ;
+    rdfs:label "CEO"@en .
+
+geonames:A a geonames:Class ;
+    rdfs:label "country, state, region ..."@en .
+
+geonames:P a geonames:Class ;
+    rdfs:label "city, village,..."@en .
+
+geonames:S a geonames:Class ;
+    rdfs:label "spot, building, farm, ..."@en .
+
+geonames:A.PCLI a geonames:Code ;
+    rdfs:label "independent political entity"@en ;
+    skos:inScheme geonames:A .

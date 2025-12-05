@@ -10,6 +10,39 @@
 
 ### Removed
 
+## Snapshot [v0.3]
+
+### Added
+
+- tbox: ontology metadata
+- tbox: comment for n-ary statement class qb:Observation
+- tbox: `rdf:Property` as type for all properties
+- abox: label for headquarters
+- abox: comment for supply flows
+- abox: comment for observations
+- abox: `sb:Enterprise` as class
+- corpus: `n-ary` tag
+
+### Changed
+
+- tbox/abox/corpus: `sb` namespace for SupplyBench ontology
+- tbox/abox/corpus: integrated `esn` namespace terms into `sb`
+- abox: data update through crawling
+- abox: URI for `org:Membership` instances
+- corpus: format from .n3 to .yaml
+- corpus: "suppliers" to "supplier companies"
+- corpus: "customers" to "customer companies"
+- corpus: "IDMs" to "IDM companies"
+- corpus: "Chip fabs" to "Chip fab sites"
+- corpus: question "City TSMC has its headquarter in" to "City that TSMC has its headquarter in"
+- corpus: question "CEOs with publications" to "People in CEO position with publications"
+- corpus: question "CEO publications in 2005" to "Publications of people in CEO position in 2005"
+
+### Fixed
+
+- tbox/abox/corpus: URI of `org` prefix
+
+
 ## Snapshot [v0.2]
 
 ### Added
@@ -43,6 +76,7 @@
 - corpus: query "Bavarian organisations"
 - corpus: query "Large equipment suppliers of TSMC"
 - corpus: queries for five or more triple patterns
+
 
 ## Snapshot [v0.1]
 

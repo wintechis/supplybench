@@ -1,0 +1,855 @@
+dataset:
+  id: http://fuseki.iis.fraunhofer.de/supplybench/query
+  prefix: supplybench
+questions:
+- id: 1
+  question:
+    en: IDM companies
+  query:
+    sparql: |-
+      PREFIX we: <https://welektronik.iis.fraunhofer.de/entity/>
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        ?x sb:organizationType we:Q285 .
+      }
+    n-ary: false
+- id: 2
+  question:
+    en: Fabless companies
+  query:
+    sparql: |-
+      PREFIX we: <https://welektronik.iis.fraunhofer.de/entity/>
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        ?x sb:organizationType we:Q286 .
+      }
+    n-ary: false
+- id: 3
+  question:
+    en: Potential services of companies
+  query:
+    sparql: |-
+      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+      PREFIX we: <https://welektronik.iis.fraunhofer.de/entity/>
+      SELECT DISTINCT ?x WHERE {
+        ?x rdf:type we:Q293 .
+      }
+    n-ary: false
+- id: 4
+  question:
+    en: Assembly/test sites
+  query:
+    sparql: |-
+      PREFIX we: <https://welektronik.iis.fraunhofer.de/entity/>
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        ?x sb:siteType we:Q298 .
+      }
+    n-ary: false
+- id: 5
+  question:
+    en: Chip fab sites
+  query:
+    sparql: |-
+      PREFIX we: <https://welektronik.iis.fraunhofer.de/entity/>
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        ?x sb:siteType we:Q297 .
+      }
+    n-ary: false
+- id: 6
+  question:
+    en: Types of companies
+  query:
+    sparql: |-
+      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        ?x rdf:type sb:OrganizationType .
+      }
+    n-ary: false
+- id: 7
+  question:
+    en: Types of sites
+  query:
+    sparql: |-
+      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        ?x rdf:type sb:SiteType .
+      }
+    n-ary: false
+- id: 8
+  question:
+    en: Companies offering design services
+  query:
+    sparql: |-
+      PREFIX we: <https://welektronik.iis.fraunhofer.de/entity/>
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        ?x sb:providesService we:Q288 .
+      }
+    n-ary: false
+- id: 9
+  question:
+    en: Small companies
+  query:
+    sparql: |-
+      PREFIX we: <https://welektronik.iis.fraunhofer.de/entity/>
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        ?x sb:size we:Q1046 .
+      }
+    n-ary: false
+- id: 10
+  question:
+    en: Company type of ASML
+  query:
+    sparql: |-
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/company/weQ1029.ttl#this> sb:organizationType ?x .
+      }
+    n-ary: false
+- id: 11
+  question:
+    en: Sites of Intel
+  query:
+    sparql: |-
+      PREFIX org: <http://www.w3.org/ns/org#>
+      SELECT DISTINCT ?x WHERE {
+        <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/company/weQ22.ttl#this> org:hasSite ?x .
+      }
+    n-ary: false
+- id: 12
+  question:
+    en: Services of Samsung
+  query:
+    sparql: |-
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/company/weQ36.ttl#this> sb:providesService ?x .
+      }
+    n-ary: false
+- id: 13
+  question:
+    en: Size of Siltronic
+  query:
+    sparql: |-
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/company/weQ1042.ttl#this> sb:size ?x .
+      }
+    n-ary: false
+- id: 14
+  question:
+    en: Publications of Pat Gelsinger
+  query:
+    sparql: |-
+      PREFIX dblp: <https://dblp.org/rdf/schema#>
+      SELECT DISTINCT ?x WHERE {
+        <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/person/wdQ7143480.ttl#this> dblp:authorOf ?x .
+      }
+    n-ary: false
+- id: 15
+  question:
+    en: Supplier companies of Siltronic
+  query:
+    sparql: |-
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        _:c sb:customer <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/company/weQ1042.ttl#this> .
+        _:c sb:supplier ?x .
+      }
+    n-ary: true
+- id: 16
+  question:
+    en: Customers of ASML
+  query:
+    sparql: |-
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        _:c sb:customer ?x .
+        _:c sb:supplier <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/company/weQ1029.ttl#this> .
+      }
+    n-ary: true
+- id: 17
+  question:
+    en: Intel's capex
+  query:
+    sparql: |-
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        ?x sb:observedEnterprise <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/company/weQ22.ttl#this> .
+        ?x sb:capex _:y .
+      }
+    n-ary: true
+- id: 18
+  question:
+    en: Intel's net profit
+  query:
+    sparql: |-
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        ?x sb:observedEnterprise <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/company/weQ22.ttl#this> .
+        ?x sb:netProfit _:y .
+      }
+    n-ary: true
+- id: 19
+  question:
+    en: Assembly/test sites of Intel
+  query:
+    sparql: |-
+      PREFIX we: <https://welektronik.iis.fraunhofer.de/entity/>
+      PREFIX org: <http://www.w3.org/ns/org#>
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/company/weQ22.ttl#this> org:hasSite ?x .
+        ?x sb:siteType we:Q298 .
+      }
+    n-ary: false
+- id: 20
+  question:
+    en: Companies from Nuremberg
+  query:
+    sparql: |-
+      PREFIX org: <http://www.w3.org/ns/org#>
+      PREFIX geonames: <http://www.geonames.org/ontology#>
+      SELECT DISTINCT ?x WHERE {
+        ?x org:hasRegisteredSite _:y .
+        _:y geonames:parentFeature <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/region/wdQ2090.ttl#this> .
+      }
+    n-ary: false
+- id: 21
+  question:
+    en: City that TSMC has its headquarter in
+  query:
+    sparql: |-
+      PREFIX org: <http://www.w3.org/ns/org#>
+      PREFIX geonames: <http://www.geonames.org/ontology#>
+      SELECT DISTINCT ?x WHERE {
+        <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/company/weQ20.ttl#this> org:hasRegisteredSite _:y .
+        _:y geonames:parentFeature ?x .
+      }
+    n-ary: false
+- id: 22
+  question:
+    en: Companies with sites in Nuremberg
+  query:
+    sparql: |-
+      PREFIX org: <http://www.w3.org/ns/org#>
+      PREFIX geonames: <http://www.geonames.org/ontology#>
+      SELECT DISTINCT ?x WHERE {
+        ?x org:hasSite _:y .
+        _:y geonames:parentFeature <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/region/wdQ2090.ttl#this> .
+      }
+    n-ary: false
+- id: 23
+  question:
+    en: Cities that Intel has sites in
+  query:
+    sparql: |-
+      PREFIX org: <http://www.w3.org/ns/org#>
+      PREFIX geonames: <http://www.geonames.org/ontology#>
+      SELECT DISTINCT ?x WHERE {
+        <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/company/weQ22.ttl#this> org:hasSite _:y .
+        _:y geonames:parentFeature ?x .
+      }
+    n-ary: false
+- id: 24
+  question:
+    en: Small fabless companies
+  query:
+    sparql: |-
+      PREFIX we: <https://welektronik.iis.fraunhofer.de/entity/>
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        ?x sb:size we:Q1046 .
+        ?x sb:organizationType we:Q286 .
+      }
+    n-ary: false
+- id: 25
+  question:
+    en: People with publications
+  query:
+    sparql: |-
+      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+      PREFIX dblp: <https://dblp.org/rdf/schema#>
+      PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+      SELECT DISTINCT ?x WHERE {
+        ?x rdf:type foaf:Person .
+        ?x dblp:authorOf _:z .
+      }
+    n-ary: false
+- id: 26
+  question:
+    en: Publications of Pat Gelsinger in 2005
+  query:
+    sparql: |-
+      PREFIX dblp: <https://dblp.org/rdf/schema#>
+      PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+      SELECT DISTINCT ?x WHERE {
+        <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/person/wdQ7143480.ttl#this> dblp:authorOf ?x  .
+        ?x dblp:yearOfPublication "2005"^^xsd:gYear .
+      }
+    n-ary: false
+- id: 27
+  question:
+    en: German companies
+  query:
+    sparql: |-
+      PREFIX org: <http://www.w3.org/ns/org#>
+      PREFIX geonames: <http://www.geonames.org/ontology#>
+      SELECT DISTINCT ?x WHERE {
+        ?x org:hasRegisteredSite _:y .
+        _:y geonames:parentFeature+ <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/region/wdQ183.ttl#this> .
+      }
+    n-ary: false
+- id: 28
+  question:
+    en: Companies with sites in Ireland
+  query:
+    sparql: |-
+      PREFIX org: <http://www.w3.org/ns/org#>
+      PREFIX geonames: <http://www.geonames.org/ontology#>
+      SELECT DISTINCT ?x WHERE {
+        ?x org:hasSite _:y .
+        _:y geonames:parentFeature+ <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/region/wdQ27.ttl#this> .
+      }
+    n-ary: false
+- id: 29
+  question:
+    en: Large supplier companies of TSMC
+  query:
+    sparql: |-
+      PREFIX we: <https://welektronik.iis.fraunhofer.de/entity/>
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        _:c sb:customer <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/company/weQ20.ttl#this> .
+        _:c sb:supplier ?x .
+        ?x sb:size we:Q1048 .
+      }
+    n-ary: true
+- id: 30
+  question:
+    en: Fabless customer companies of TSMC
+  query:
+    sparql: |-
+      PREFIX we: <https://welektronik.iis.fraunhofer.de/entity/>
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        _:c sb:customer ?x .
+        _:c sb:supplier <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/company/weQ20.ttl#this> .
+        ?x sb:organizationType we:Q286 .
+      }
+    n-ary: true
+- id: 31
+  question:
+    en: Supplier companies of TSMC that offer design services
+  query:
+    sparql: |-
+      PREFIX we: <https://welektronik.iis.fraunhofer.de/entity/>
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        _:c sb:customer <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/company/weQ20.ttl#this> .
+        _:c sb:supplier ?x .
+        ?x sb:providesService we:Q288 .
+      }
+    n-ary: true
+- id: 32
+  question:
+    en: Customer companies of TSMC that offer design services
+  query:
+    sparql: |-
+      PREFIX we: <https://welektronik.iis.fraunhofer.de/entity/>
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        _:c sb:customer ?x .
+        _:c sb:supplier <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/company/weQ20.ttl#this> .
+        ?x sb:providesService we:Q288 .
+      }
+    n-ary: true
+- id: 33
+  question:
+    en: Large customer companies of TSMC
+  query:
+    sparql: |-
+      PREFIX we: <https://welektronik.iis.fraunhofer.de/entity/>
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        _:c sb:customer ?x .
+        _:c sb:supplier <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/company/weQ20.ttl#this> .
+        ?x sb:size we:Q1048 .
+      }
+    n-ary: true
+- id: 34
+  question:
+    en: Fabless supplier companies of TSMC
+  query:
+    sparql: |-
+      PREFIX we: <https://welektronik.iis.fraunhofer.de/entity/>
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        _:c sb:customer <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/company/weQ20.ttl#this> .
+        _:c sb:supplier ?x .
+        ?x sb:organizationType we:Q286 .
+      }
+    n-ary: true
+- id: 35
+  question:
+    en: Number of employees of very large companies
+  query:
+    sparql: |-
+      PREFIX we: <https://welektronik.iis.fraunhofer.de/entity/>
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        _:y sb:size we:Q1049 .
+        ?x sb:observedEnterprise _:y .
+        ?x sb:employees _:z .
+      }
+    n-ary: true
+- id: 36
+  question:
+    en: Operationg income of very large companies
+  query:
+    sparql: |-
+      PREFIX we: <https://welektronik.iis.fraunhofer.de/entity/>
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        _:y sb:size we:Q1049 .
+        ?x sb:observedEnterprise _:y .
+        ?x sb:operatingIncome _:z .
+      }
+    n-ary: true
+- id: 37
+  question:
+    en: Total assets of fabless companies
+  query:
+    sparql: |-
+      PREFIX we: <https://welektronik.iis.fraunhofer.de/entity/>
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        _:y sb:organizationType we:Q286 .
+        ?x sb:observedEnterprise _:y .
+        ?x sb:totalAssets _:z .
+      }
+    n-ary: true
+- id: 38
+  question:
+    en: Total equity of foundry companies
+  query:
+    sparql: |-
+      PREFIX we: <https://welektronik.iis.fraunhofer.de/entity/>
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        _:y sb:organizationType we:Q287 .
+        ?x sb:observedEnterprise _:y .
+        ?x sb:totalEquity _:z .
+      }
+    n-ary: true
+- id: 39
+  question:
+    en: Total revenue of companies offering foundry services
+  query:
+    sparql: |-
+      PREFIX we: <https://welektronik.iis.fraunhofer.de/entity/>
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        _:y sb:providesService we:Q291 .
+        ?x sb:observedEnterprise _:y .
+        ?x sb:totalRevenue _:z .
+      }
+    n-ary: true
+- id: 40
+  question:
+    en: Capex of companies offering foundry services
+  query:
+    sparql: |-
+      PREFIX we: <https://welektronik.iis.fraunhofer.de/entity/>
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        _:y sb:providesService we:Q291 .
+        ?x sb:observedEnterprise _:y .
+        ?x sb:capex _:z .
+      }
+    n-ary: true
+- id: 41
+  question:
+    en: CEO of Intel
+  query:
+    sparql: |-
+      PREFIX org: <http://www.w3.org/ns/org#>
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        _:y org:organization <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/company/weQ22.ttl#this> .
+        _:y org:role sb:CEO .
+        _:y org:member ?x .
+      }
+    n-ary: true
+- id: 42
+  question:
+    en: Chip fab sites of very large companies
+  query:
+    sparql: |-
+      PREFIX we: <https://welektronik.iis.fraunhofer.de/entity/>
+      PREFIX org: <http://www.w3.org/ns/org#>
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        _:y sb:size we:Q1049 .
+        _:y org:hasSite ?x .
+        ?x sb:siteType we:Q297 .
+      }
+    n-ary: false
+- id: 43
+  question:
+    en: IDM companies with sites in Nuremberg
+  query:
+    sparql: |-
+      PREFIX we: <https://welektronik.iis.fraunhofer.de/entity/>
+      PREFIX org: <http://www.w3.org/ns/org#>
+      PREFIX geonames: <http://www.geonames.org/ontology#>
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        ?x sb:organizationType we:Q285 .
+        ?x org:hasSite _:y .
+        _:y geonames:parentFeature+ <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/region/wdQ2090.ttl#this> .
+      }
+    n-ary: false
+- id: 44
+  question:
+    en: Medium size companies with sites in Nuremberg
+  query:
+    sparql: |-
+      PREFIX we: <https://welektronik.iis.fraunhofer.de/entity/>
+      PREFIX org: <http://www.w3.org/ns/org#>
+      PREFIX geonames: <http://www.geonames.org/ontology#>
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        ?x sb:size we:Q1047 .
+        ?x org:hasSite _:y .
+        _:y geonames:parentFeature+ <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/region/wdQ2090.ttl#this> .
+      }
+    n-ary: false
+- id: 45
+  question:
+    en: Country where TSMC has its headquarter
+  query:
+    sparql: |-
+      PREFIX org: <http://www.w3.org/ns/org#>
+      PREFIX geonames: <http://www.geonames.org/ontology#>
+      SELECT DISTINCT ?x WHERE {
+        <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/company/weQ20.ttl#this> org:hasRegisteredSite _:y .
+        _:y geonames:parentFeature+ ?x .
+        ?x geonames:featureCode geonames:A.PCLI .
+      }
+    n-ary: false
+- id: 46
+  question:
+    en: Countries where Intel has sites
+  query:
+    sparql: |-
+      PREFIX org: <http://www.w3.org/ns/org#>
+      PREFIX geonames: <http://www.geonames.org/ontology#>
+      SELECT DISTINCT ?x WHERE {
+        <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/company/weQ22.ttl#this> org:hasSite _:y .
+        _:y geonames:parentFeature+ ?x .
+        ?x geonames:featureCode geonames:A.PCLI .
+      }
+    n-ary: false
+- id: 47
+  question:
+    en: Services offered by German companies
+  query:
+    sparql: |-
+      PREFIX org: <http://www.w3.org/ns/org#>
+      PREFIX geonames: <http://www.geonames.org/ontology#>
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        _:y sb:providesService ?x .
+        _:y org:hasRegisteredSite _:z .
+        _:z geonames:parentFeature+ <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/region/wdQ183.ttl#this> .
+      }
+    n-ary: false
+- id: 48
+  question:
+    en: German companies offering design services
+  query:
+    sparql: |-
+      PREFIX we: <https://welektronik.iis.fraunhofer.de/entity/>
+      PREFIX org: <http://www.w3.org/ns/org#>
+      PREFIX geonames: <http://www.geonames.org/ontology#>
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        ?x sb:providesService we:Q288 .
+        ?x org:hasRegisteredSite _:y .
+        _:y geonames:parentFeature+ <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/region/wdQ183.ttl#this> .
+      }
+    n-ary: false
+- id: 49
+  question:
+    en: Medium size companies from China
+  query:
+    sparql: |-
+      PREFIX we: <https://welektronik.iis.fraunhofer.de/entity/>
+      PREFIX org: <http://www.w3.org/ns/org#>
+      PREFIX geonames: <http://www.geonames.org/ontology#>
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        ?x sb:size we:Q1047 .
+        ?x org:hasRegisteredSite _:y .
+        _:y geonames:parentFeature+ <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/region/wdQ148.ttl#this> .
+      }
+    n-ary: false
+- id: 50
+  question:
+    en: Company that Pat Gelsinger is or was CEO of
+  query:
+    sparql: |-
+      PREFIX org: <http://www.w3.org/ns/org#>
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        _:y org:member <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/person/wdQ7143480.ttl#this> .
+        _:y org:role sb:CEO .
+        _:y org:organization ?x .
+      }
+    n-ary: true
+- id: 51
+  question:
+    en: Net profit of companies in 2022
+  query:
+    sparql: |-
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        ?x sb:observedEnterprise _:y .
+        ?x sb:accountingYear 2022 .
+        ?x sb:netProfit _:a .
+      }
+    n-ary: true
+- id: 52
+  question:
+    en: Operating income of companies in 2021
+  query:
+    sparql: |-
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        ?x sb:observedEnterprise _:y .
+        ?x sb:accountingYear 2021 .
+        ?x sb:operatingIncome _:a .
+      }
+    n-ary: true
+- id: 53
+  question:
+    en: Total equity of companies given in New Taiwan dollar
+  query:
+    sparql: |-
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        ?x sb:observedEnterprise _:y .
+        ?x sb:currency "New Taiwan dollar"@en .
+        ?x sb:operatingIncome _:a .
+      }
+    n-ary: true
+- id: 54
+  question:
+    en: People in CEO position with publications
+  query:
+    sparql: |-
+      PREFIX org: <http://www.w3.org/ns/org#>
+      PREFIX dblp: <https://dblp.org/rdf/schema#>
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        _:y org:role sb:CEO .
+        _:y org:member ?x .
+        ?x dblp:authorOf _:a .
+      }
+    n-ary: true
+- id: 55
+  question:
+    en: Medium size supplier companies of large companies
+  query:
+    sparql: |-
+      PREFIX we: <https://welektronik.iis.fraunhofer.de/entity/>
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        _:y sb:size we:Q1048 .
+        _:c sb:customer _:y .
+        _:c sb:supplier ?x .
+        ?x sb:size we:Q1047 .
+      }
+    n-ary: true
+- id: 56
+  question:
+    en: Medium size customer companies of large companies
+  query:
+    sparql: |-
+      PREFIX we: <https://welektronik.iis.fraunhofer.de/entity/>
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        _:y sb:size we:Q1048 .
+        _:c sb:customer ?x .
+        _:c sb:supplier _:y .
+        ?x sb:size we:Q1047 .
+      }
+    n-ary: true
+- id: 57
+  question:
+    en: Employee count of companies with assembly/test sites
+  query:
+    sparql: |-
+      PREFIX we: <https://welektronik.iis.fraunhofer.de/entity/>
+      PREFIX org: <http://www.w3.org/ns/org#>
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        _:y org:hasSite _:z .
+        _:z sb:siteType we:Q298 .
+        ?x sb:observedEnterprise _:y .
+        ?x sb:employees _:a .
+      }
+    n-ary: true
+- id: 58
+  question:
+    en: Net profit of companies with chip fab sites
+  query:
+    sparql: |-
+      PREFIX we: <https://welektronik.iis.fraunhofer.de/entity/>
+      PREFIX org: <http://www.w3.org/ns/org#>
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        _:y org:hasSite _:z .
+        _:z sb:siteType we:Q297 .
+        ?x sb:observedEnterprise _:y .
+        ?x sb:netProfit _:a .
+      }
+    n-ary: true
+- id: 59
+  question:
+    en: Companies with CEOs with publications
+  query:
+    sparql: |-
+      PREFIX org: <http://www.w3.org/ns/org#>
+      PREFIX dblp: <https://dblp.org/rdf/schema#>
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        _:y org:organization ?x .
+        _:y org:role sb:CEO .
+        _:y org:member _:a .
+        _:a dblp:authorOf _:z  .
+      }
+    n-ary: true
+- id: 60
+  question:
+    en: CEOs of companies that offer foundry services
+  query:
+    sparql: |-
+      PREFIX we: <https://welektronik.iis.fraunhofer.de/entity/>
+      PREFIX org: <http://www.w3.org/ns/org#>
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        _:z sb:providesService we:Q291 .
+        _:y org:organization _:z .
+        _:y org:role sb:CEO .
+        _:y org:member ?x .
+      }
+    n-ary: true
+- id: 61
+  question:
+    en: CEOs of IDM companies
+  query:
+    sparql: |-
+      PREFIX we: <https://welektronik.iis.fraunhofer.de/entity/>
+      PREFIX org: <http://www.w3.org/ns/org#>
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        _:z sb:organizationType we:Q285 .
+        _:y org:organization _:z .
+        _:y org:role sb:CEO .
+        _:y org:member ?x .
+      }
+    n-ary: true
+- id: 62
+  question:
+    en: CEOs of very large companies
+  query:
+    sparql: |-
+      PREFIX we: <https://welektronik.iis.fraunhofer.de/entity/>
+      PREFIX org: <http://www.w3.org/ns/org#>
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        _:y sb:size we:Q1049 .
+        _:z org:organization _:y .
+        _:z org:role sb:CEO .
+        _:z org:member ?x .
+      }
+    n-ary: true
+- id: 63
+  question:
+    en: Chip fab sites of very large foundry companies
+  query:
+    sparql: |-
+      PREFIX we: <https://welektronik.iis.fraunhofer.de/entity/>
+      PREFIX org: <http://www.w3.org/ns/org#>
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        _:y sb:organizationType we:Q287 .
+        _:y sb:size we:Q1049 .
+        _:y org:hasSite ?x .
+        ?x sb:siteType we:Q297 .
+      }
+    n-ary: false
+- id: 64
+  question:
+    en: Publications of people in CEO position in 2005
+  query:
+    sparql: |-
+      PREFIX org: <http://www.w3.org/ns/org#>
+      PREFIX dblp: <https://dblp.org/rdf/schema#>
+      PREFIX sb: <https://purl.org/supplybench#>
+      PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+      SELECT DISTINCT ?x WHERE {
+        _:y org:role sb:CEO .
+        _:y org:member _:z .
+        _:z dblp:authorOf ?x  .
+        ?x  dblp:yearOfPublication "2005"^^xsd:gYear .
+      }
+    n-ary: true
+- id: 65
+  question:
+    en: Taiwanese companies that supply Intel
+  query:
+    sparql: |-
+      PREFIX org: <http://www.w3.org/ns/org#>
+      PREFIX geonames: <http://www.geonames.org/ontology#>
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        _:c sb:customer <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/company/weQ22.ttl#this> .
+        _:c sb:supplier ?x .
+        ?x org:hasRegisteredSite _:y .
+        _:y geonames:parentFeature+ <https://solid.iis.fraunhofer.de/oe-40200/2024/10/velektronik-graph-clean/region/wdQ865.ttl#this> .
+      }
+    n-ary: true
+- id: 66
+  question:
+    en: Operating income of companies in 2021 given in New Taiwan dollar
+  query:
+    sparql: |-
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        ?x sb:observedEnterprise _:y .
+        ?x sb:accountingYear 2021 .
+        ?x sb:currency "New Taiwan dollar"@en .
+        ?x sb:operatingIncome _:a .
+      }
+    n-ary: true
+- id: 67
+  question:
+    en: Capex of companies in 2022 given in US dollar
+  query:
+    sparql: |-
+      PREFIX sb: <https://purl.org/supplybench#>
+      SELECT DISTINCT ?x WHERE {
+        ?x sb:observedEnterprise _:y .
+        ?x sb:accountingYear 2021 .
+        ?x sb:currency "United States dollar"@en .
+        ?x sb:operatingIncome _:a .
+      }
+    n-ary: true
